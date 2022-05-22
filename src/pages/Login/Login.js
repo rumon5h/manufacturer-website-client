@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 
 const Login = () => {
     const [
         signInWithEmailAndPassword,
-        logInuser,
-        logINloading,
-        logInerror,
-      ] = useSignInWithEmailAndPassword(auth);
-      const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+        logInUser,
+        logInLoading,
+        logInError,
+    ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
     const [error, setError] = useState('');
     const handleLoginEvent = event => {
@@ -21,14 +22,33 @@ const Login = () => {
         const password = event.target.password.value;
         signInWithEmailAndPassword(email, password);
     }
-    if(logINloading){
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if (logInUser || gUser) {
+            navigate(from, { replace: true });
+        }
+
+    }, [logInUser, navigate, gUser, from]);
+
+    useEffect(()=>{
+    if (logInError) {
+        return toast.error(logInError?.code, { id: 'Error' })
+    }
+    },[logInError])
+
+    if (logInLoading || gLoading) {
         return <Loading></Loading>
     }
+
+
 
     return (
         <div className='w-full flex justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
-            <h3 className='text-2xl font-bold text-center'>Log In</h3>
+                <h3 className='text-2xl font-bold text-center'>Log In</h3>
                 <form
                     onSubmit={handleLoginEvent}
                     className="card-body mt-[-30px] items-center text-center">
@@ -37,29 +57,24 @@ const Login = () => {
                             <span className="label-text">Email</span>
                         </label>
                         <input type="email" name='email' placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-                        <label className="label">
-                            {error && <span className="label-text-alt">Alt label</span>}
-                        </label>
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
                         <input type="password" name='password' placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-                        <label className="label">
-                            {error && <span className="label-text-alt">Alt label</span>}
-                        </label>
+                     
                     </div>
                     <input type='submit' className="btn w-full" value='LogIn' />
                 </form>
 
                 <div
                     className="card-body mt-[-50px] items-center text-center">
-                        <p><small>New to there? <Link to='/signup' className='text-purple-700' >Create new account</Link> </small></p>
+                    <p><small>New to there? <Link to='/signup' className='text-purple-700' >Create new account</Link> </small></p>
                     <div className="divider">OR</div>
-                    <button 
-                    onClick={()=> signInWithGoogle()}
-                    className="btn w-full btn-outline">Continue with google</button>
+                    <button
+                        onClick={() => signInWithGoogle()}
+                        className="btn w-full btn-outline">Continue with google</button>
                 </div>
 
 
