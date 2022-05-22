@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+
+import Loading from '../Shared/Loading/Loading';
 
 
 const Signup = () => {
@@ -13,25 +15,28 @@ const Signup = () => {
         user,
         loading,
         newUsererror,
-      ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, UpdateError] = useUpdateProfile(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
-
-    const handleSignupEvent = event => {
+    if (loading || updating) {
+        return <Loading></Loading>
+    }
+    const handleSignupEvent = async event => {
         event.preventDefault();
         const displayName = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
         const confirmPassword = event.target.confirmPassword.value;
         console.log(displayName, email, password, confirmPassword);
-        
-        if(password !== confirmPassword){
-          return setPassError('Password did not match.')
+
+        if (password !== confirmPassword) {
+            return setPassError('Password did not match.')
         }
-        createUserWithEmailAndPassword(email, password);
-
-
-        console.log('hello signup :D');
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({displayName: displayName});
     }
+    // console.log(user);
 
     return (
         <div className='w-full flex justify-center items-center'>
@@ -81,9 +86,11 @@ const Signup = () => {
                 </form>
                 <div
                     className="card-body mt-[-50px] items-center text-center">
-                    <p><small>New to there? <Link to='/login' className='text-purple-700' >LogIn</Link> </small></p>
+                    <p><small>Already have an account <Link to='/login' className='text-purple-700' >LogIn</Link> </small></p>
                     <div className="divider">OR</div>
-                    <button className="btn w-full btn-outline">Continue with google</button>
+                    <button 
+                    onClick={() => signInWithGoogle()}
+                    className="btn w-full btn-outline">Continue with google</button>
                 </div>
 
 

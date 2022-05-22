@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading/Loading';
 
 const Login = () => {
     const [
@@ -10,6 +11,7 @@ const Login = () => {
         logINloading,
         logInerror,
       ] = useSignInWithEmailAndPassword(auth);
+      const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
     const [error, setError] = useState('');
     const handleLoginEvent = event => {
@@ -18,6 +20,9 @@ const Login = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
         signInWithEmailAndPassword(email, password);
+    }
+    if(logINloading){
+        return <Loading></Loading>
     }
 
     return (
@@ -52,7 +57,9 @@ const Login = () => {
                     className="card-body mt-[-50px] items-center text-center">
                         <p><small>New to there? <Link to='/signup' className='text-purple-700' >Create new account</Link> </small></p>
                     <div className="divider">OR</div>
-                    <button className="btn w-full btn-outline">Continue with google</button>
+                    <button 
+                    onClick={()=> signInWithGoogle()}
+                    className="btn w-full btn-outline">Continue with google</button>
                 </div>
 
 
