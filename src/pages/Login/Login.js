@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Login = () => {
+    const [
+        signInWithEmailAndPassword,
+        logInuser,
+        logINloading,
+        logInerror,
+      ] = useSignInWithEmailAndPassword(auth);
+
     const [error, setError] = useState('');
     const handleLoginEvent = event => {
         event.preventDefault();
         console.log('hello login :D');
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        signInWithEmailAndPassword(email, password);
     }
 
     return (
