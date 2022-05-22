@@ -1,64 +1,89 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
+
 const Signup = () => {
+    const [passError, setPassError] = useState('');
     const [error, setError] = useState('');
-    const handleLoginEvent = event => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        newUsererror,
+      ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+
+
+    const handleSignupEvent = event => {
         event.preventDefault();
-        console.log('hello login :D');
+        const displayName = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const confirmPassword = event.target.confirmPassword.value;
+        console.log(displayName, email, password, confirmPassword);
+        
+        if(password !== confirmPassword){
+          return setPassError('Password did not match.')
+        }
+        createUserWithEmailAndPassword(email, password);
+
+
+        console.log('hello signup :D');
     }
 
     return (
         <div className='w-full flex justify-center items-center'>
-            <div class="card w-96 bg-base-100 shadow-xl">
+            <div className="card w-96 bg-base-100 shadow-xl">
                 <h3 className='text-2xl font-bold text-center'>Sign Up</h3>
                 <form
-                    onSubmit={handleLoginEvent}
-                    class="card-body mt-[-30px] items-center text-center">
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text">Name</span>
+                    onSubmit={handleSignupEvent}
+                    className="card-body mt-[-30px] items-center text-center">
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Name</span>
                         </label>
-                        <input type="text" placeholder='Your name' name='name' class="input input-bordered w-full max-w-xs" />
-                        <label class="label">
-                            {error && <span class="label-text-alt">Alt label</span>}
-                        </label>
-                    </div>
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text">Email</span>
-                        </label>
-                        <input type="email" name='email' placeholder="Your email" class="input input-bordered w-full max-w-xs" />
-                        <label class="label">
-                            {error && <span class="label-text-alt">Alt label</span>}
+                        <input type="text" placeholder='Your name' name='name' className="input input-bordered w-full max-w-xs" />
+                        <label className="label">
+                            {error && <span className="label-text-alt">Alt label</span>}
                         </label>
                     </div>
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text">Password</span>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Email</span>
                         </label>
-                        <input type="password" name='password' placeholder="Password" class="input input-bordered w-full max-w-xs" />
-                        <label class="label">
-                            {error && <span class="label-text-alt">Alt label</span>}
+                        <input type="email" name='email' placeholder="Your email" className="input input-bordered w-full max-w-xs" />
+                        <label className="label">
+                            {error && <span className="label-text-alt">Alt label</span>}
                         </label>
                     </div>
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text">Confirm password</span>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Password</span>
                         </label>
-                        <input type="password" name='confirmPassword' placeholder="Password" class="input input-bordered w-full max-w-xs" />
-                        <label class="label">
-                            {error && <span class="label-text-alt">Alt label</span>}
+                        <input type="password" name='password' placeholder="Password" className="input input-bordered w-full max-w-xs" />
+                        <label className="label">
+                            {error && <span className="label-text-alt">Alt label</span>}
+                        </label>
+                    </div>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Confirm password</span>
+                        </label>
+                        <input type="password" name='confirmPassword' placeholder="Password" className="input input-bordered w-full max-w-xs" />
+                        <label className="label">
+                            {error && <span className="label-text-alt text-red-500">{passError}</span>}
                         </label>
                     </div>
 
-                    <input type='submit' class="btn w-full" value='SignUp' />
+                    <input type='submit' className="btn w-full" value='SignUp' />
                 </form>
                 <div
-                    class="card-body mt-[-50px] items-center text-center">
+                    className="card-body mt-[-50px] items-center text-center">
                     <p><small>New to there? <Link to='/login' className='text-purple-700' >LogIn</Link> </small></p>
-                    <div class="divider">OR</div>
-                    <button class="btn w-full btn-outline">Continue with google</button>
+                    <div className="divider">OR</div>
+                    <button className="btn w-full btn-outline">Continue with google</button>
                 </div>
 
 
