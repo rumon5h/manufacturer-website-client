@@ -36,21 +36,21 @@ const Banner = () => {
                 <div class="carousel-item active float-left w-full">
                     <img
                         src={banner1}
-                        class="block w-full h-[80vh]"
+                        class="block w-full h-[83vh]"
                         alt="Wild Landscape"
                     />
                 </div>
                 <div class="carousel-item float-left w-full">
                     <img
                         src={banner2}
-                        class="block w-full h-[80vh]"
+                        class="block w-full h-[83vh]"
                         alt="Camera"
                     />
                 </div>
                 <div class="carousel-item float-left w-full">
                     <img
                         src={banner3}
-                        class="block w-full h-[80vh]"
+                        class="block w-full h-[83vh]"
                         alt="Exotic Fruits"
                     />
                 </div>
@@ -73,6 +73,7 @@ const Banner = () => {
                 <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
+            
         </div>
     );
 };
