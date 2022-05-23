@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home/Home/Home';
-import Navbar from './pages/Home/Navbar/Navbar';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import  { Toaster } from 'react-hot-toast';
 import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 import Services from './pages/Services/Services';
+import Navbar from './pages/Navbar/Navbar';
 
 
 function App() {

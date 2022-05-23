@@ -33,11 +33,11 @@ const Login = () => {
 
     }, [logInUser, navigate, gUser, from]);
 
-    useEffect(()=>{
-    if (logInError) {
-        return toast.error(logInError?.code, { id: 'Error' })
-    }
-    },[logInError])
+    useEffect(() => {
+        if (logInError) {
+            return toast.error(logInError?.code, { id: 'Error' })
+        }
+    }, [logInError])
 
     if (logInLoading || gLoading) {
         return <Loading></Loading>
@@ -63,7 +63,7 @@ const Login = () => {
                             <span className="label-text">Password</span>
                         </label>
                         <input type="password" name='password' placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-                     
+
                     </div>
                     <input type='submit' className="btn w-full" value='LogIn' />
                 </form>

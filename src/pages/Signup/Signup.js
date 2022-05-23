@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
-
 import Loading from '../Shared/Loading/Loading';
-
 
 const Signup = () => {
     const [passError, setPassError] = useState('');
-    const [error, setError] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
+    const [updateProfile, updating, UpdateError] = useUpdateProfile(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const { register, formState: { errors }, handleSubmit } = useForm();
+
+
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         newUsererror,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-    const [updateProfile, updating, UpdateError] = useUpdateProfile(auth);
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-
+    
     if (loading || updating) {
         return <Loading></Loading>
     }
+
+    if (user || gUser) {
+        navigate(from, { replace: true });
+    }
+
     const handleSignupEvent = async event => {
         event.preventDefault();
         const displayName = event.target.name.value;
@@ -34,7 +42,7 @@ const Signup = () => {
             return setPassError('Password did not match.')
         }
         await createUserWithEmailAndPassword(email, password);
-        await updateProfile({displayName: displayName});
+        await updateProfile({ displayName: displayName });
     }
     // console.log(user);
 
@@ -49,9 +57,16 @@ const Signup = () => {
                         <label className="label">
                             <span className="label-text">Name</span>
                         </label>
-                        <input type="text" placeholder='Your name' name='name' className="input input-bordered w-full max-w-xs" />
+                        <input 
+                        {...register("name", { required: true })} 
+                        type="text" 
+                        placeholder='Your name' 
+                        name='name' 
+                        className="input input-bordered w-full max-w-xs" 
+                        />
                         <label className="label">
-                            {error && <span className="label-text-alt">Alt label</span>}
+                            {errors.name?.type === 'required' && <span className="label-text-alt">Alt label</span>}
+
                         </label>
                     </div>
                     <div className="form-control w-full max-w-xs">
@@ -60,7 +75,7 @@ const Signup = () => {
                         </label>
                         <input type="email" name='email' placeholder="Your email" className="input input-bordered w-full max-w-xs" />
                         <label className="label">
-                            {error && <span className="label-text-alt">Alt label</span>}
+                            {errors && <span className="label-text-alt">Alt label</span>}
                         </label>
                     </div>
                     <div className="form-control w-full max-w-xs">
@@ -69,7 +84,7 @@ const Signup = () => {
                         </label>
                         <input type="password" name='password' placeholder="Password" className="input input-bordered w-full max-w-xs" />
                         <label className="label">
-                            {error && <span className="label-text-alt">Alt label</span>}
+                            {errors && <span className="label-text-alt">Alt label</span>}
                         </label>
                     </div>
                     <div className="form-control w-full max-w-xs">
@@ -78,7 +93,7 @@ const Signup = () => {
                         </label>
                         <input type="password" name='confirmPassword' placeholder="Password" className="input input-bordered w-full max-w-xs" />
                         <label className="label">
-                            {error && <span className="label-text-alt text-red-500">{passError}</span>}
+                            {passError && <span className="label-text-alt text-red-500">{passError}</span>}
                         </label>
                     </div>
 
@@ -88,9 +103,9 @@ const Signup = () => {
                     className="card-body mt-[-50px] items-center text-center">
                     <p><small>Already have an account <Link to='/login' className='text-purple-700' >LogIn</Link> </small></p>
                     <div className="divider">OR</div>
-                    <button 
-                    onClick={() => signInWithGoogle()}
-                    className="btn w-full btn-outline">Continue with google</button>
+                    <button
+                        onClick={() => signInWithGoogle()}
+                        className="btn w-full btn-outline">Continue with google</button>
                 </div>
 
 
