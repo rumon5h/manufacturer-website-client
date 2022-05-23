@@ -7,13 +7,14 @@ import  { Toaster } from 'react-hot-toast';
 import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 import Services from './pages/Services/Services';
 import Navbar from './pages/Navbar/Navbar';
+import Purchase from './pages/Purchase/Purchase';
 
 
 function App() {
   return (
-    <div className="max-w-7xl px-12	mx-auto">
+    <div className="max-w-7xl	mx-auto">
       <Navbar></Navbar>
-    <Routes>
+    <Routes className='px-12'>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/home' element={<Home/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
@@ -22,6 +23,11 @@ function App() {
           <Services/>
         </PrivateRoute>
       }></Route>
+      <Route path='/Purchase' element={
+        <PrivateRoute>
+          <Purchase/>
+        </PrivateRoute>
+      } ></Route>
       <Route path='/signup' element={<Signup/>}></Route>
     </Routes>
     <Toaster />
