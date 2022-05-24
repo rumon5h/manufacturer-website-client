@@ -33,7 +33,7 @@ function App() {
         
 
       </Route>
-      <Route path='/purchase' element={
+      <Route path='/purchase/:_id' element={
         <PrivateRoute>
           <Purchase/>
         </PrivateRoute>

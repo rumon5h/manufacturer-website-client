@@ -1,12 +1,14 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 
 const Navbar = () => {
     const [user] = useAuthState(auth);
+    const location = useLocation();
+    
     const menuItems = <>
         <li><Link className='mr-2' to='/home' >Home</Link></li>
         {user?.uid && <li><Link className='mr-2' to='/dashboard' >Dashboard</Link></li>}
@@ -25,7 +27,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='' className="btn btn-ghost normal-case text-xl">LOGO</Link>
+                <Link to='' className="btn btn-ghost normal-case text-xl">RRElectronics</Link>
             </div>
             <div className="navbar-middle hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
@@ -33,9 +35,9 @@ const Navbar = () => {
                 </ul>
             </div>
             {
-                user?.uid && <div className="navbar-end flex lg:hidden">
+                user?.uid  && location?.pathname?.includes('dashboard') &&  <div className="navbar-end flex lg:hidden">
                 <ul className="menu menu-horizontal p-0">
-                <label for="my-drawer-2" class="btn bg-gray-900 text-white drawer-button lg:hidden">Dashboard</label>
+                <label for="my-drawer-2" className="btn bg-gray-900 text-white drawer-button lg:hidden">Dashboard</label>
                 </ul>
             </div>
             }
