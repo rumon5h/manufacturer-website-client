@@ -33,11 +33,11 @@ const Login = () => {
 
     }, [logInUser, navigate, gUser, from]);
 
-    useEffect(() => {
+ 
         if (logInError) {
             return toast.error(logInError?.code, { id: 'Error' })
         }
-    }, [logInError])
+    
 
     if (logInLoading || gLoading) {
         return <Loading></Loading>
