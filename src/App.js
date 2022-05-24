@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import AddReview from './pages/Dashboard/AddReview';
 import Profile from './pages/Dashboard/Profile';
 import MyOrders from './pages/Dashboard/MyOrders';
+import NotFound from './pages/NotFound/NotFound';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         </PrivateRoute>
       } ></Route>
       <Route path='/signup' element={<Signup/>}></Route>
+      <Route path='*' element={<NotFound/>}></Route>
     </Routes>
     <Toaster />
 

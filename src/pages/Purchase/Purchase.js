@@ -18,17 +18,7 @@ const Purchase = () => {
             })
     }, [_id]);
 
-    const handleOrderEvent = (event) =>{
-
-        console.log('ordered');
-
-        const order ={
-
-        }
-    }
-
-
-   
+  
     return (
         <div>
             <div className="card w-[80%] mx-auto bg-base-100 shadow-xl">
@@ -36,11 +26,12 @@ const Purchase = () => {
                     <img src={tool?.image} alt="" />
                     <h2 className="card-title">{tool?.name}</h2>
                     <p>{tool?.description}</p>
+                    <p>Price: {tool?.price}</p>
                     <p>In Stock: {tool?.quantity}</p>
                     <p>Minimum Order: {orderQuantity}</p>
-                    <input type="number" onChange={(e)=>setOrderQuantity( e.target.value)} class="input input-bordered w-full mb-2 max-w-xs" />
+                    
                     <div className="card-actions">
-                        <label for="my-modal-6" class="btn modal-button">Purchase</label>
+                        <label htmlFor="my-modal-6" className="btn modal-button">Purchase</label>
                     </div>
                 </div>
             </div>
