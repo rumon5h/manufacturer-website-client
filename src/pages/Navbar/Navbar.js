@@ -8,7 +8,6 @@ import auth from '../../firebase.init';
 const Navbar = () => {
     const [user] = useAuthState(auth);
     const location = useLocation();
-    
     const menuItems = <>
         <li><Link className='mr-2' to='/home' >Home</Link></li>
         {user?.uid && <li><Link className='mr-2' to='/dashboard' >Dashboard</Link></li>}

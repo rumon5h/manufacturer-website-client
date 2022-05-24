@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loading from '../../Shared/Loading/Loading';
 
 const Tools = () => {
     const [tools, setTools] = useState([]);
@@ -11,6 +12,9 @@ const Tools = () => {
                 setTools(data)
             })
     }, []);
+    if(!tools){
+        return <Loading></Loading>
+    }
     return (
         <div className='mx-12'>
             <h2 className='text-gray-900 font-bold text-2xl my-5 mx-auto w-[fit-content]'>Tools</h2>

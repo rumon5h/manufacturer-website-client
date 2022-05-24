@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../Shared/Loading/Loading';
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
@@ -9,7 +10,11 @@ const Reviews = () => {
                 console.log(data);
                 setReviews(data)
             })
-    }, [])
+    }, []);
+
+    if(!reviews){
+        return <Loading></Loading>
+    }
     return (
         <div className='mx-12 my-12'>
             <h2 className='text-gray-900 font-bold text-2xl my-5 mx-auto w-[fit-content]'>Reviews</h2>
