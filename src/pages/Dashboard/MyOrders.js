@@ -57,7 +57,7 @@ const MyOrders = () => {
                                 {
                                     order.paid ? <button disabled className='btn btn-active ml-2'>Delete</button> : <label
 
-                                        for="delete-order-modal" class="btn  btn-active ml-2 modal-button">Delete</label>
+                                       htmlFor="delete-order-modal" className="btn  btn-active ml-2 modal-button">Delete</label>
                                 }
                             </div>
                         </div>

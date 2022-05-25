@@ -8,6 +8,7 @@ const Reviews = () => {
             .then(res => res.json())
             .then(data => {
                 setReviews(data)
+                console.log(data);
             })
     }, []);
 
@@ -29,6 +30,7 @@ const Reviews = () => {
                                     
                                 </div>
                             </div>
+                            <p>Stars: {review?.stars}</p>
                             <p className='text-blue-800 font-bold text-lg cursor-pointer'>{review?.name}</p>
                         </div>
                         <p>{review?.review}</p>
