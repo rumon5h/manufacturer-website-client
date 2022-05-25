@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -72,7 +71,7 @@ const Purchase = () => {
         console.log(bookedTool);
     }
 
-    const handleBookingInfo = async (event) => {
+    const handleBookingInfo = (event) => {
 
         if (!bookingInfo?.email) {
             const bookedTool = {

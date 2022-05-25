@@ -3,6 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+import OrderDeleteModal from './OrderDeleteModal';
 
 const MyOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -20,20 +21,18 @@ const MyOrders = () => {
 
     const handleDeleteOrderEvent = (id) => {
 
-        console.log(id);
-
         const url = `http://localhost:5000/order/${id}`;
         fetch(url, {
             method: 'DELETE'
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            const exist = orders.filter(order => order._id !== id);
-            if(exist){
-                setOrders(exist)
-            }
-        });
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const exist = orders.filter(order => order._id !== id);
+                if (exist) {
+                    setOrders(exist)
+                }
+            });
     }
     return (
         <div className='mx-12'>
@@ -56,12 +55,13 @@ const MyOrders = () => {
                                     order.paid ? '' : <Link to={`/pay/${order._id}`} type="button" className="btn btn-active">Pay Now</Link>
                                 }
                                 {
-                                    order.paid ? <button disabled className='btn btn-active ml-2'>Delete</button> : <button
-                                        onClick={() => handleDeleteOrderEvent(order._id)}
-                                        className='btn btn-active ml-2'>Delete</button>
+                                    order.paid ? <button disabled className='btn btn-active ml-2'>Delete</button> : <label
+
+                                        for="delete-order-modal" class="btn  btn-active ml-2 modal-button">Delete</label>
                                 }
                             </div>
                         </div>
+                        {order && <OrderDeleteModal handleDeleteOrderEvent={handleDeleteOrderEvent} _id={order._id} ></OrderDeleteModal>}
                     </div>)
                 }
             </div>
