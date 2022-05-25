@@ -12,6 +12,7 @@ import AddReview from './pages/Dashboard/AddReview';
 import Profile from './pages/Dashboard/Profile';
 import MyOrders from './pages/Dashboard/MyOrders';
 import NotFound from './pages/NotFound/NotFound';
+import AllTool from './pages/AllTool/AllTool';
 
 
 function App() {
@@ -21,6 +22,11 @@ function App() {
     <Routes className='px-12'>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/home' element={<Home/>}></Route>
+      <Route path='/allTool' element={
+        <PrivateRoute>
+          <AllTool></AllTool>
+        </PrivateRoute>
+      }></Route>
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/dashboard' element={
         <PrivateRoute>
