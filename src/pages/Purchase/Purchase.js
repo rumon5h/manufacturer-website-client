@@ -16,14 +16,15 @@ const Purchase = () => {
     const [bookingInfo, setBookingInfo] = useState({});
 
     useEffect(() => {
-        fetch('http://localhost:5000/tools')
+        const url = `http://localhost:5000/tool?id=${_id}`;
+     
+        fetch(url)
             .then(res => res.json())
             .then(data => {
-                const exist = data.find(tool => tool._id === _id);
-
-                setTool(exist);
+                setTool(data)
             });
     }, [_id]);
+
     if (!tool) {
         return <Loading></Loading>
     }
@@ -68,23 +69,27 @@ const Purchase = () => {
             pending: true
         }
         setBookingInfo(bookedTool)
+        console.log(bookedTool);
     }
 
     const handleBookingInfo = async (event) => {
-  
+
         if (!bookingInfo?.email) {
             const bookedTool = {
-                ...tool,
+                name: tool.name,
                 price: parseInt(tool.price) * 100,
+                quantity: tool.quantity,
+                image: tool.image,
                 email: user.email,
+                description: tool.description,              
                 displayName: user.displayName,
                 paid: false,
                 pending: true
+                
             }
-
-            const url = `http://localhost:5000/tools`;
-
-            fetch(url, {
+            console.log(bookedTool);
+  
+            fetch('http://localhost:5000/tools', {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json'
@@ -96,22 +101,22 @@ const Purchase = () => {
                     console.log(data);
                     toast.success('Booking successful')
                 })
-        }else{
+        } else {
 
-        const url = `http://localhost:5000/tools`;
+            const url = `http://localhost:5000/tools`;
 
-        fetch(url, {
-            method: "PUT",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(bookingInfo)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                toast.success('Booking successful')
+            fetch(url, {
+                method: "PUT",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(bookingInfo)
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    toast.success('Booking successful')
+                })
         }
     }
 

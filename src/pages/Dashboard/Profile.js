@@ -7,13 +7,13 @@ const Profile = () => {
 
     return (
         <div>
-            <div class="card w-[95%] bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Shoes!</h2>
-                    <label class="label">
-                        <span class="label-text">Name</span>
+            <div className="card w-[95%] bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="card-title">Shoes!</h2>
+                    <label className="label">
+                        <span className="label-text">Name</span>
                     </label>
-                    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                    <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
                 </div>
             </div>
         </div>
