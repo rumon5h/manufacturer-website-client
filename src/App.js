@@ -16,6 +16,8 @@ import AllTool from './pages/AllTool/AllTool';
 import Payment from './pages/Payment/Payment';
 import MakeAdmin from './pages/Dashboard/MakeAdmin';
 import AdminPrivateRoute from './pages/AdminPrivateRoute/AdminPrivateRoute';
+import Blogs from './pages/Blogs/Blogs';
+import AddProduct from './pages/Dashboard/AddProduct';
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
     <Routes className='px-12'>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/home' element={<Home/>}></Route>
+      <Route path='/blogs' element={<Blogs/>}></Route>
+
       <Route path='/allTool' element={
         <PrivateRoute>
           <AllTool></AllTool>
@@ -47,6 +51,11 @@ function App() {
         <Route path='/dashboard/addReviews' element={<AddReview></AddReview>}></Route>
         <Route path='/dashboard/makeAdmin' element={
           <AdminPrivateRoute><MakeAdmin></MakeAdmin></AdminPrivateRoute>
+        }></Route>
+        <Route path='/dashboard/addProduct' element={
+          <AdminPrivateRoute>
+            <AddProduct/>
+          </AdminPrivateRoute>
         }></Route>
       </Route>
       <Route path='/purchase/:_id' element={

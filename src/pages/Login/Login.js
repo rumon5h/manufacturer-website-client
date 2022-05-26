@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -12,9 +12,8 @@ const Login = () => {
         logInLoading,
         logInError,
     ] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
 
-    const [error, setError] = useState('');
     const handleLoginEvent = event => {
         event.preventDefault();
         const email = event.target.email.value;
@@ -33,9 +32,11 @@ const Login = () => {
     }, [logInUser, navigate, gUser, from]);
 
  
-        if (logInError) {
-            return toast.error(logInError?.code, { id: 'Error' })
-        }
+        useEffect(()=>{
+            if (logInError) {
+                return toast.error(logInError?.code, { id: 'Error' })
+            }
+        },[logInError])
     
 
     if (logInLoading || gLoading) {

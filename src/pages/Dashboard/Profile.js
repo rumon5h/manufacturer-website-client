@@ -10,7 +10,7 @@ const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
 
     const { isLoading, error, data, refetch } = useQuery(['user'], () =>
-        fetch(`http://localhost:5000/user?email=${user?.email}`)
+        fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`)
             .then(res => res.json())
     )
 
@@ -45,7 +45,7 @@ const Profile = () => {
             role
         };
 
-        const newUrl = await `http://localhost:5000/user?email=${user?.email}`
+        const newUrl = await `https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`
         fetch(newUrl, {
             method: 'PUT',
             headers: {

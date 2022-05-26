@@ -12,7 +12,7 @@ const Navbar = () => {
         <li><Link className='mr-2' to='/home' >Home</Link></li>
         {user?.uid && <li><Link className='mr-2' to='/dashboard' >Dashboard</Link></li>}
         {/* <li><Link className='mr-2' to='/purchase' >Purchase</Link></li> */}
-        <li><Link className='mr-2' to='/about' >About</Link></li>
+        <li><Link className='mr-2' to='/blogs' >Blogs</Link></li>
         {user?.uid ?  <li><Link onClick={() => signOut(auth)}  className='mr-2' to='/login' >LogOut</Link></li> : <li><Link className='mr-2' to='/login' >Login</Link></li> }
     </>
     return (

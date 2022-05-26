@@ -15,7 +15,7 @@ const Purchase = () => {
     const [bookingInfo, setBookingInfo] = useState({});
 
     useEffect(() => {
-        const url = `http://localhost:5000/tool?id=${_id}`;
+        const url = `https://calm-castle-51840.herokuapp.com/tool?id=${_id}`;
      
         fetch(url)
             .then(res => res.json())
@@ -86,7 +86,7 @@ const Purchase = () => {
                 
             }
   
-            fetch('http://localhost:5000/tools', {
+            fetch('https://calm-castle-51840.herokuapp.com/tools', {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json'
@@ -99,7 +99,7 @@ const Purchase = () => {
                 })
         } else {
 
-            const url = `http://localhost:5000/tools`;
+            const url = `https://calm-castle-51840.herokuapp.com/tools`;
 
             fetch(url, {
                 method: "PUT",
