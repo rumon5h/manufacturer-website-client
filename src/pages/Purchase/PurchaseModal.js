@@ -27,7 +27,6 @@ const PurchaseModal = ({tool}) => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             toast.success('Information updating done', {id: 'userInfo'});
         })
     }

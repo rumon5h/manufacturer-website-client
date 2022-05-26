@@ -36,7 +36,6 @@ const Signup = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
         const confirmPassword = event.target.confirmPassword.value;
-        console.log(displayName, email, password, confirmPassword);
 
         if (password !== confirmPassword) {
             return setPassError('Password did not match.')

@@ -68,7 +68,6 @@ const Purchase = () => {
             pending: true
         }
         setBookingInfo(bookedTool)
-        console.log(bookedTool);
     }
 
     const handleBookingInfo = (event) => {
@@ -86,7 +85,6 @@ const Purchase = () => {
                 pending: true
                 
             }
-            console.log(bookedTool);
   
             fetch('http://localhost:5000/tools', {
                 method: "PUT",
@@ -97,7 +95,6 @@ const Purchase = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     toast.success('Booking successful')
                 })
         } else {
@@ -113,7 +110,6 @@ const Purchase = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     toast.success('Booking successful')
                 })
         }

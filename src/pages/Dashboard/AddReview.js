@@ -11,8 +11,8 @@ const AddReview = () => {
         const stars = event.target.stars.value;
         const review = event.target.description.value;
         const name = user.displayName;
-        if(stars >= 6){
-            return toast.error('Please enter less than 7 stars', {id: 'stars'})
+        if(stars >= 5){
+            return toast.error('Please enter less than 6 stars', {id: 'stars'})
         }
         else if(stars < 1){
             return toast.error('Please enter at least 1')
@@ -34,7 +34,7 @@ const AddReview = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            toast.success('Review update successful.')
         })
     }
     return (

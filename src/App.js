@@ -13,6 +13,7 @@ import Profile from './pages/Dashboard/Profile';
 import MyOrders from './pages/Dashboard/MyOrders';
 import NotFound from './pages/NotFound/NotFound';
 import AllTool from './pages/AllTool/AllTool';
+import Payment from './pages/Payment/Payment';
 
 
 function App() {
@@ -33,6 +34,11 @@ function App() {
           <Dashboard/>
         </PrivateRoute>
       }>
+        <Route path='/dashboard/payment/:id' element={
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        }></Route>
         <Route index element={<AddReview></AddReview>}></Route>
         <Route path='/dashboard/profile' element={<Profile></Profile>}></Route>
         <Route path='/dashboard/myOrders' element={<MyOrders></MyOrders>}></Route>

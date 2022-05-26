@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 import OrderDeleteModal from './OrderDeleteModal';
@@ -14,7 +13,6 @@ const MyOrders = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setOrders(data);
             })
     }, [user]);
@@ -27,7 +25,6 @@ const MyOrders = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 const exist = orders.filter(order => order._id !== id);
                 if (exist) {
                     setOrders(exist)
@@ -52,12 +49,12 @@ const MyOrders = () => {
                                     {order.description}
                                 </p>
                                 {
-                                    order.paid ? '' : <Link to={`/pay/${order._id}`} type="button" className="btn btn-active">Pay Now</Link>
+                                    order.paid ? '' : <Link to={`/dashboard/payment/${order._id}`} type="button" className="btn btn-active">Payment</Link>
                                 }
                                 {
                                     order.paid ? <button disabled className='btn btn-active ml-2'>Delete</button> : <label
 
-                                       htmlFor="delete-order-modal" className="btn  btn-active ml-2 modal-button">Delete</label>
+                                        htmlFor="delete-order-modal" className="btn  btn-active ml-2 modal-button">Delete</label>
                                 }
                             </div>
                         </div>

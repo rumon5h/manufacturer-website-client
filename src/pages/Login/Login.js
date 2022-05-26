@@ -17,7 +17,6 @@ const Login = () => {
     const [error, setError] = useState('');
     const handleLoginEvent = event => {
         event.preventDefault();
-        console.log('hello login :D');
         const email = event.target.email.value;
         const password = event.target.password.value;
         signInWithEmailAndPassword(email, password);
