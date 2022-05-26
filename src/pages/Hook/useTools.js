@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 const useTools = () => {
-    const [tools, setTools] = useState([]);
-    useEffect(() =>{
+    const { isLoading, error, data, refetch } = useQuery(['tools'], () =>
         fetch('http://localhost:5000/tools')
-        .then(res => res.json())
-        .then(data => {
-            setTools(data)
-        })
-    },[]);
-    return [tools, setTools]
+            .then(res => res.json())
+    )
+    return [isLoading, error, data, refetch]
 
 };
 

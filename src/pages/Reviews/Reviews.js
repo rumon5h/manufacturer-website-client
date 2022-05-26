@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading/Loading';
 
 const Reviews = () => {
-    const [reviews, setReviews] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+       const { isLoading, error, data, refetch } = useQuery(['reviews'], () =>
+        fetch(`http://localhost:5000/reviews`)
             .then(res => res.json())
-            .then(data => {
-                setReviews(data)
-            })
-    }, []);
+    )
 
-    if(!reviews){
+    if(isLoading){
         return <Loading></Loading>
     }
+
     return (
         <div className='mx-12 my-12'>
             <h2 className='text-gray-900 font-bold text-2xl my-5 mx-auto w-[fit-content]'>Reviews</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                 {
-                    reviews.map(review => <div 
+                    data?.map(review => <div 
                         className='text-center'
                     key={review._id}>
                         <div className='text-center m-3 p-3 '>

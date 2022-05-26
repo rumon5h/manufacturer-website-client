@@ -1,23 +1,21 @@
 import { ArrowRightIcon } from '@heroicons/react/solid';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import useTools from '../../Hook/useTools';
 import Loading from '../../Shared/Loading/Loading';
 
 const Tools = () => {
-    const [tools] = useTools();
+    const [isLoading, error, data, refetch] = useTools();
 
-    useEffect(()=>{
-        if(!tools){
-            return <Loading></Loading>
-        }
-    },[tools])
+    if(isLoading){
+        return <Loading></Loading>
+    }
     return (
         <div className='mx-12'>
             <h2 className='text-gray-900 font-bold text-2xl my-5 mx-auto w-[fit-content]'>Tools</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
-                    tools?.slice(0, 6).map(tool => <div key={tool._id} className="flex justify-center">
+                    data?.slice(0, 6).map(tool => <div key={tool._id} className="flex justify-center">
                         <div className="rounded-lg shadow-lg bg-white max-w-sm">
                             <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
                                 <img className="rounded-t-lg" src={tool?.image} alt="" />

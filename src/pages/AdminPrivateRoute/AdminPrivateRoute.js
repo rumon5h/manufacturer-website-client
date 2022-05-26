@@ -1,33 +1,30 @@
 import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
 import { Navigate, useLocation } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 
-const AdminPrivateRoute = ({children}) => {
+const AdminPrivateRoute = ({ children }) => {
     const [user, Loading] = useAuthState(auth);
-    const [userInfo, setUserInfo] = useState({});
     const location = useLocation();
 
-    useEffect(() => {
-        const newUrl = `http://localhost:5000/user?email=${user?.email}`;
-        fetch(newUrl)
+    const { isLoading, error, data, refetch } = useQuery(['user'], () =>
+        fetch(`http://localhost:5000/user?email=${user?.email}`)
             .then(res => res.json())
-            .then(data => {
-                setUserInfo(data);
-            })
-    }, [user]);
-    if(Loading){
+    )
+
+    if (Loading || isLoading) {
         return <Loading></Loading>
     }
+    console.log(data);
+    console.log(data?.role);
 
-    if(userInfo?.role !== 'Admin'){
+    if(data?.role !== 'Admin'){
         signOut(auth);
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
-
-
 
     return children;
 };

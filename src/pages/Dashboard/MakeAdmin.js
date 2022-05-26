@@ -73,7 +73,7 @@ const MakeAdmin = () => {
                     {/* <!-- row 1 --> */}
 
                     {
-                        users.map((user, index) => <tr
+                        users?.map((user, index) => <tr
                             className=''
                             key={user._id}>
                             <th>{index + 1}</th>
@@ -81,7 +81,7 @@ const MakeAdmin = () => {
                             <td>{user.email}</td>
                             <td>{user?.role}</td>
                             {
-                                user.role === 'Admin' ? <td disabled
+                                user?.role === 'Admin' ? <td disabled
                                     onClick={() => handleMakeAdmin(user?._id)} className='btn bg-gray-900'>Make Admin</td>
                                     :
                                     <button onClick={() => handleMakeAdmin(user?._id)} className='btn bg-gray-900'>Make Admin</button>
