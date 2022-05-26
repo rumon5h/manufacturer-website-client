@@ -14,6 +14,8 @@ import MyOrders from './pages/Dashboard/MyOrders';
 import NotFound from './pages/NotFound/NotFound';
 import AllTool from './pages/AllTool/AllTool';
 import Payment from './pages/Payment/Payment';
+import MakeAdmin from './pages/Dashboard/MakeAdmin';
+import AdminPrivateRoute from './pages/AdminPrivateRoute/AdminPrivateRoute';
 
 
 function App() {
@@ -43,8 +45,9 @@ function App() {
         <Route path='/dashboard/profile' element={<Profile></Profile>}></Route>
         <Route path='/dashboard/myOrders' element={<MyOrders></MyOrders>}></Route>
         <Route path='/dashboard/addReviews' element={<AddReview></AddReview>}></Route>
-        
-
+        <Route path='/dashboard/makeAdmin' element={
+          <AdminPrivateRoute><MakeAdmin></MakeAdmin></AdminPrivateRoute>
+        }></Route>
       </Route>
       <Route path='/purchase/:_id' element={
         <PrivateRoute>

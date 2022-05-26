@@ -14,8 +14,7 @@ const Profile = () => {
         fetch(`http://localhost:5000/user?email=${user?.email}`)
             .then(res => res.json())
     )
-    console.log(isLoading, error, data, refetch);
-    
+        
     useEffect(()=>{
         if (data) {
             setUserInfo(data);
@@ -35,6 +34,7 @@ const Profile = () => {
         const linkedin = event?.target?.linkedin?.value || userInfo?.linkedin;
         const location = event.target?.location?.value || userInfo?.location;
         const education = event.target?.education?.value || userInfo?.education;
+        const role = userInfo?.role || 'User';
         const userInformation = {
             name,
             email,
@@ -42,7 +42,8 @@ const Profile = () => {
             number,
             linkedin,
             location: location,
-            education
+            education,
+            role
         };
 
         const newUrl = await `http://localhost:5000/user?email=${user?.email}`
