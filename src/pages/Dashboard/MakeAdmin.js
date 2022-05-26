@@ -81,10 +81,10 @@ const MakeAdmin = () => {
                             <td>{user.email}</td>
                             <td>{user?.role}</td>
                             {
-                                user?.role === 'Admin' ? <td disabled
-                                    onClick={() => handleMakeAdmin(user?._id)} className='btn bg-gray-900'>Make Admin</td>
+                                user?.role === 'Admin' ? <td><button disabled
+                                onClick={() => handleMakeAdmin(user?._id)} className='btn bg-gray-900'>Make Admin</button></td>
                                     :
-                                    <button onClick={() => handleMakeAdmin(user?._id)} className='btn bg-gray-900'>Make Admin</button>
+                                    <td><button onClick={() => handleMakeAdmin(user?._id)} className='btn bg-gray-900'>Make Admin</button></td>
                             }
                         </tr>)
                     }

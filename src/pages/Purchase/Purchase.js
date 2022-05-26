@@ -27,7 +27,7 @@ const Purchase = () => {
     if (!tool) {
         return <Loading></Loading>
     }
-
+console.log(tool);
     const handleIncreaseQuantity = (event) => {
         const newQuantity = orderQuantity + 1;
         tool.quantity = tool.quantity - 1;

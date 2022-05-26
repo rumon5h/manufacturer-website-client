@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
@@ -14,20 +14,21 @@ const Signup = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         newUsererror,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+    useEffect(()=>{
+        if (user || gUser) {
+            navigate(from, { replace: true });
+        }
+       },[user, gUser, navigate, from])
     
     if (loading || updating) {
         return <Loading></Loading>
-    }
-
-    if (user || gUser) {
-        navigate(from, { replace: true });
     }
 
     const handleSignupEvent = async event => {
