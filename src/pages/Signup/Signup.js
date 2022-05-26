@@ -43,7 +43,6 @@ const Signup = () => {
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName: displayName });
     }
-    // console.log(user);
 
     return (
         <div className='w-full flex justify-center items-center'>

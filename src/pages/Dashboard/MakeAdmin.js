@@ -5,7 +5,6 @@ import Loading from '../Shared/Loading/Loading';
 
 const MakeAdmin = () => {
 
-
     const { isLoading, error, data: users, refetch } = useQuery(['users'], () =>
         fetch(`http://localhost:5000/users`)
             .then(res => res.json())
@@ -18,7 +17,6 @@ const MakeAdmin = () => {
 
         const exist = users.find(user => user._id === id);
         if (exist) {
-
             const name = exist?.name;
             const email = exist?.email;
             const address = exist?.address;
@@ -49,7 +47,6 @@ const MakeAdmin = () => {
                 body: JSON.stringify(userInformation)
             })
                 .then(res => {
-                    console.log(res);
                     res.json()
                 })
                 .then(data => {

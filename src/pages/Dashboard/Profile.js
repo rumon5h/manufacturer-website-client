@@ -8,20 +8,19 @@ import Loading from '../Shared/Loading/Loading';
 const Profile = () => {
     const [user, Loading] = useAuthState(auth);
     const [userInfo, setUserInfo] = useState({});
-    console.log(user);
 
     const { isLoading, error, data, refetch } = useQuery(['user'], () =>
         fetch(`http://localhost:5000/user?email=${user?.email}`)
             .then(res => res.json())
     )
-        
-    useEffect(()=>{
+
+    useEffect(() => {
         if (data) {
             setUserInfo(data);
         }
-    },[data]);
+    }, [data]);
 
-    if(isLoading || Loading){
+    if (isLoading || Loading) {
         return <Loading></Loading>
     }
 
@@ -54,13 +53,9 @@ const Profile = () => {
             },
             body: JSON.stringify(userInformation)
         })
-            .then(res => {
-                console.log(res);
-                res.json()
-            })
+            .then(res => res.json())
             .then(data => {
                 setUserInfo(data)
-                console.log(data);
                 refetch()
                 toast.success('Information updating successful');
             })

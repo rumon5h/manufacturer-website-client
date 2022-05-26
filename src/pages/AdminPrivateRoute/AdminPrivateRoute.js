@@ -15,7 +15,6 @@ const AdminPrivateRoute = ({children}) => {
         fetch(newUrl)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setUserInfo(data);
             })
     }, [user]);
