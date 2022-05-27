@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
@@ -11,6 +12,9 @@ const Profile = () => {
         fetch(`http://localhost:5000/user?email=${user?.email}`)
             .then(res => res.json())
     )
+    if(error){
+        toast.error(error?.message, {id: 'queryError:D'})
+    }
     if (isLoading) {
         return <Loading></Loading>
     }

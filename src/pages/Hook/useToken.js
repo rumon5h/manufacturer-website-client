@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { useEffect, useState } from "react"
 
 const useToken = (user) => {
@@ -24,29 +25,63 @@ const useToken = (user) => {
                     setToken(acToken)
                 })
         }
-
-
     }, [user]);
 
-    useEffect(() =>{
-
-        fetch(`http://localhost:5000/user?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setUserInformation(data)
-            })
-    },[user])
-
     useEffect(() => {
-        const name = userInformation?.name || user?.user?.displayName || '';
-        const email = userInformation?.email || user?.user?.email || '';
-        const address = userInformation?.address || '';
-        const number = userInformation?.number || '';
-        const linkedin = userInformation?.linkedin || '';
-        const location = userInformation?.location || '';
-        const education = userInformation?.location || '';
-        const role = userInformation?.role || '';
+        const handleLoadUserData = async () => {
+            const url = `http://localhost:5000/user?email=${user?.user?.email}`;
+            await fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    setUserInformation(data)
+                    if (data) {
+                        const handleUpdateUserData = async () => {
+                            const name = data?.name || user?.user?.displayName || '';
+                            const email = data?.email || user?.user?.email || '';
+                            const address = data?.address || '';
+                            const number = data?.number || '';
+                            const linkedin = data?.linkedin || '';
+                            const location = data?.location || '';
+                            const education = data?.location || '';
+                            const role = data?.role || '';
+                            const userData = {
+                                name,
+                                email,
+                                address,
+                                number,
+                                linkedin,
+                                location,
+                                education,
+                                role
+                            }
+                            await fetch(`http://localhost:5000/user?email=${user?.user?.email}`, {
+                                method: 'PUT',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(userData)
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    // Done
+                                })
+                        }
+                        handleUpdateUserData()
+                    }
+                })
+        }
+        handleLoadUserData();
+    }, [user])
+
+    if (!userInformation) {
+        const name = user?.user?.displayName || '';
+        const email = user?.user?.email;
+        const address = '';
+        const number = '';
+        const linkedin = '';
+        const location = '';
+        const education = '';
+        const role = '';
         const userData = {
             name,
             email,
@@ -57,7 +92,7 @@ const useToken = (user) => {
             education,
             role
         }
-        fetch(`http://localhost:5000/user?email=${user?.email}`, {
+        fetch(`http://localhost:5000/user?email=${user?.user?.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -66,10 +101,10 @@ const useToken = (user) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // Done
             })
+    }
 
-    }, [user, userInformation]);
     return [token]
 }
 
