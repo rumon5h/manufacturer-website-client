@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -10,7 +10,7 @@ const AdminPrivateRoute = ({ children }) => {
     const [user, Loading] = useAuthState(auth);
     const location = useLocation();
 
-    const { isLoading, error, data, refetch } = useQuery(['user'], () =>
+    const { isLoading, data, } = useQuery(['user'], () =>
         fetch(`http://localhost:5000/user?email=${user?.email}`)
             .then(res => res.json())
     )
@@ -18,10 +18,9 @@ const AdminPrivateRoute = ({ children }) => {
     if (Loading || isLoading) {
         return <Loading></Loading>
     }
-    console.log(data);
-    console.log(data?.role);
 
     if(data?.role !== 'Admin'){
+        localStorage.removeItem('accessToken')
         signOut(auth);
         return <Navigate to="/login" state={{ from: location }} replace />;
     }

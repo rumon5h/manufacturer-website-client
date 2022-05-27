@@ -13,6 +13,7 @@ const MyOrders = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 setOrders(data);
             })
     }, [user]);
@@ -45,6 +46,7 @@ const MyOrders = () => {
                                 <h5 className="text-gray-900 text-xl font-medium mb-2">{order?.name}</h5>
                                 <p>Price: {order?.price}</p>
                                 <p className='font-bold text-gray-900'>Paid: {order?.paid ? 'Paid' : "Unpaid"}</p>
+                                <p className='font-bold text-gray-900'>Status: {!order?.pending ? 'Shipped' : "Pending"}</p>
                                 <p className="text-gray-700 text-base mb-4">
                                     {order.description}
                                 </p>

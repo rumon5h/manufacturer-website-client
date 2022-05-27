@@ -20,14 +20,13 @@ const Purchase = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                setTool(data)
+                setTool(data);
             });
     }, [_id]);
 
     if (!tool) {
         return <Loading></Loading>
     }
-console.log(tool);
     const handleIncreaseQuantity = (event) => {
         const newQuantity = orderQuantity + 1;
         tool.quantity = tool.quantity - 1;

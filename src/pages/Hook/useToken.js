@@ -2,7 +2,7 @@ import { async } from "@firebase/util";
 import { useEffect, useState } from "react"
 
 const useToken = (user) => {
-    console.log(user?.user);
+
     const [userInformation, setUserInformation] = useState({});
     const [token, setToken] = useState('');
     useEffect(() => {
@@ -31,7 +31,6 @@ const useToken = (user) => {
     useEffect(() => {
         const handleLoadUserInfo = async () => {
             const email = user?.user?.email
-            console.log(user);
             const url = `http://localhost:5000/user?email=${email}`;
             fetch(url)
                 .then(res => res.json())
@@ -60,7 +59,6 @@ const useToken = (user) => {
                 .then(res => res.json())
                 .then(data => {
                     // Done
-                    console.log(data);
                 })
         }
     },[userInformation, user])

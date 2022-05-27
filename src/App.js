@@ -19,6 +19,7 @@ import AdminPrivateRoute from './pages/AdminPrivateRoute/AdminPrivateRoute';
 import Blogs from './pages/Blogs/Blogs';
 import AddProduct from './pages/Dashboard/AddProduct';
 import Portfolio from './pages/Portfolio/Portfolio';
+import ManageProduct from './pages/Dashboard/ManageProduct/ManageProduct';
 
 
 function App() {
@@ -57,6 +58,11 @@ function App() {
         <Route path='/dashboard/addProduct' element={
           <AdminPrivateRoute>
             <AddProduct/>
+          </AdminPrivateRoute>
+        }></Route>
+        <Route path='/dashboard/manageProduct' element={
+          <AdminPrivateRoute>
+            <ManageProduct/>
           </AdminPrivateRoute>
         }></Route>
       </Route>
