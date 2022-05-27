@@ -18,6 +18,7 @@ import MakeAdmin from './pages/Dashboard/MakeAdmin';
 import AdminPrivateRoute from './pages/AdminPrivateRoute/AdminPrivateRoute';
 import Blogs from './pages/Blogs/Blogs';
 import AddProduct from './pages/Dashboard/AddProduct';
+import Portfolio from './pages/Portfolio/Portfolio';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       <Route path='/' element={<Home/>}></Route>
       <Route path='/home' element={<Home/>}></Route>
       <Route path='/blogs' element={<Blogs/>}></Route>
+      <Route path='/portfolio' element={<Portfolio/>}></Route>
 
       <Route path='/allTool' element={
         <PrivateRoute>

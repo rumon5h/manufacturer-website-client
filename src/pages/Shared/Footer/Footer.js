@@ -18,7 +18,7 @@ const Footer = () => {
                 </div>
             </div>
             <div>
-                <p>Copyright © 2022 - All right reserved by KHAN Industries Ltd</p>
+                <p>Copyright © 2022 - All right reserved by RRElectronics Ltd</p>
             </div>
         </footer>
     );

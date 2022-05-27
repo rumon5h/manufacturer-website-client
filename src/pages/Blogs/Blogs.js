@@ -2,7 +2,7 @@ import React from 'react';
 
 const Blogs = () => {
     return (
-        <div>
+        <div className='p-12'>
             <div className="card mt-3 w-[95%] bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title">1. How will you improve the performance of a React Application?</h2>
@@ -35,8 +35,6 @@ const Blogs = () => {
                         <p> Modern versions of unit testing can be found in frameworks like JUnit, or testing tools like TestComplete. Look a little further and you will find SUnit, the mother of all unit testing frameworks created by Kent Beck, and a reference in chapter 5 of The Art of Software Testing . Before that, it's mostly a mystery. I asked Jerry Weinberg about his experiences with unit testing -- "We did unit testing in 1956. As far as I knew, it was always done, as long as there were computers".</p>
 
                         <p>  Regardless of when and where unit testing began, one thing is for sure. Unit testing is here to stay. Let's look at some more practical aspects of unit testing.</p>
-
-
                     </div>
 
                 </div>
