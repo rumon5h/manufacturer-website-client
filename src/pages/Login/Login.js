@@ -3,6 +3,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../Hook/useToken';
 import Loading from '../Shared/Loading/Loading';
 
 const Login = () => {
@@ -23,27 +24,25 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-
+    const [token] = useToken(logInUser || gUser)
+    console.log(token);
     useEffect(() => {
-        if (logInUser || gUser) {
+        if (token) {
             navigate(from, { replace: true });
         }
 
-    }, [logInUser, navigate, gUser, from]);
+    }, [token, navigate, from]);
 
- 
-        useEffect(()=>{
-            if (logInError) {
-                return toast.error(logInError?.code, { id: 'Error' })
-            }
-        },[logInError])
-    
+    useEffect(() => {
+        if (logInError) {
+            toast.error(logInError?.code, { id: 'Error' })
+        }
+    }, [logInError])
+
 
     if (logInLoading || gLoading) {
         return <Loading></Loading>
     }
-
-
 
     return (
         <div className='w-full flex justify-center items-center'>

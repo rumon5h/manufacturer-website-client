@@ -18,7 +18,7 @@ const PurchaseModal = ({tool}) => {
             address,
             number
         }
-        fetch('https://calm-castle-51840.herokuapp.com/user', {
+        fetch('http://localhost:5000/user', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

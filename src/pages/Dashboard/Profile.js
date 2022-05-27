@@ -1,56 +1,52 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 
 const Profile = () => {
-    const [user, Loading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
 
     const { isLoading, error, data, refetch } = useQuery(['user'], () =>
-        fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`)
+        fetch(`http://localhost:5000/user?email=${user?.email}`)
             .then(res => res.json())
     )
-
-    if (isLoading || Loading) {
+    if (isLoading) {
         return <Loading></Loading>
     }
-
-    const handleUpdateUserInfo = async event => {
+    
+    const handleUpdateUserInfo = (event) => {
         event.preventDefault();
-        const name = event?.target?.name?.value || user?.displayName;
-        const email = event?.target?.email?.value || user?.email;
+        const name = event?.target?.name?.value || data?.name;
+        const email = event?.target?.email?.value || data?.email;
         const address = event?.target?.address?.value || data?.address;
         const number = event?.target?.number?.value || data?.number;
         const linkedin = event?.target?.linkedin?.value || data?.linkedin;
-        const location = event.target?.location?.value || data?.location;
-        const education = event.target?.education?.value || data?.education;
-        const role = data?.role || 'User';
-        const userInformation = {
+        const location = event?.target?.location?.value || data?.location;
+        const education = event?.target?.education?.value || data?.education;
+
+        const userData = {
             name,
             email,
             address,
             number,
             linkedin,
-            location: location,
+            location,
             education,
-            role
-        };
+        }
 
-        const newUrl = await `https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`
-        fetch(newUrl, {
+        fetch(`http://localhost:5000/user?email=${user?.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(userInformation)
+            body: JSON.stringify(userData)
         })
-            .then(res => res.json())
-            .then(data => {
-                refetch()
-                toast.success('Information updating successful');
-            })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            refetch()
+        })
     }
 
     return (

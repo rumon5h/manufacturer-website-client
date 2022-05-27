@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
+import useToken from '../Hook/useToken';
 
 const Signup = () => {
     const [passError, setPassError] = useState('');
@@ -21,11 +22,13 @@ const Signup = () => {
         newUsererror,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
+    const [token] = useToken(user || gUser);
+
     useEffect(()=>{
-        if (user || gUser) {
+        if (token) {
             navigate(from, { replace: true });
         }
-       },[user, gUser, navigate, from])
+       },[navigate, from, token]);
     
     if (loading || updating) {
         return <Loading></Loading>

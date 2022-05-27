@@ -8,7 +8,7 @@ import Loading from '../Shared/Loading/Loading';
 const Dashboard = () => {
   const [user] = useAuthState(auth);
   const { isLoading, error, data: userInfo, refetch } = useQuery(['user'], () =>
-    fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`)
+    fetch(`http://localhost:5000/user?email=${user?.email}`)
       .then(res => res.json())
   );
 

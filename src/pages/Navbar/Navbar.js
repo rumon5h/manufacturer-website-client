@@ -8,12 +8,17 @@ import auth from '../../firebase.init';
 const Navbar = () => {
     const [user] = useAuthState(auth);
     const location = useLocation();
+
+    const handleLogOutEvent = () => {
+        signOut(auth);
+        localStorage.removeItem('accessToken');
+    }
     const menuItems = <>
         <li><Link className='mr-2' to='/home' >Home</Link></li>
         {user?.uid && <li><Link className='mr-2' to='/dashboard' >Dashboard</Link></li>}
         {/* <li><Link className='mr-2' to='/purchase' >Purchase</Link></li> */}
         <li><Link className='mr-2' to='/blogs' >Blogs</Link></li>
-        {user?.uid ?  <li><Link onClick={() => signOut(auth)}  className='mr-2' to='/login' >LogOut</Link></li> : <li><Link className='mr-2' to='/login' >Login</Link></li> }
+        {user?.uid ? <li><Link onClick={handleLogOutEvent} className='mr-2' to='/login' >LogOut</Link></li> : <li><Link className='mr-2' to='/login' >Login</Link></li>}
     </>
     return (
         <div className="navbar bg-gray-900 text-white">
@@ -34,11 +39,11 @@ const Navbar = () => {
                 </ul>
             </div>
             {
-                user?.uid  && location?.pathname?.includes('dashboard') &&  <div className="navbar-end flex lg:hidden">
-                <ul className="menu menu-horizontal p-0">
-                <label htmlFor="my-drawer-2" className="btn bg-gray-900 text-white drawer-button lg:hidden">Dashboard</label>
-                </ul>
-            </div>
+                user?.uid && location?.pathname?.includes('dashboard') && <div className="navbar-end flex lg:hidden">
+                    <ul className="menu menu-horizontal p-0">
+                        <label htmlFor="my-drawer-2" className="btn bg-gray-900 text-white drawer-button lg:hidden">Dashboard</label>
+                    </ul>
+                </div>
             }
         </div>
     );

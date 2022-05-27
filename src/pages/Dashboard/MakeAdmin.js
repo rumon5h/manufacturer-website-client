@@ -6,7 +6,7 @@ import Loading from '../Shared/Loading/Loading';
 const MakeAdmin = () => {
 
     const { isLoading, error, data: users, refetch } = useQuery(['users'], () =>
-        fetch(`https://calm-castle-51840.herokuapp.com/users`)
+        fetch(`http://localhost:5000/users`)
             .then(res => res.json())
     )
     if (isLoading) {
@@ -37,7 +37,7 @@ const MakeAdmin = () => {
                 role
             };
 
-            const newUrl = `https://calm-castle-51840.herokuapp.com/user?email=${exist?.email}`;
+            const newUrl = `http://localhost:5000/user?email=${exist?.email}`;
 
             fetch(newUrl, {
                 method: 'PUT',
