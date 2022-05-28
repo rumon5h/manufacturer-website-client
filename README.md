@@ -1,6 +1,7 @@
 # RRElectronics
 
-Live Site [Create React App](https://github.com/facebook/create-react-app).
+Live Side [Live Side](https://assignment-12-d283f.web.app/).
+Server Side Code Link [Live Side](https://github.com/programming-hero-web-course1/manufacturer-website-server-side-rumon5).
 
 ## Features
 * First of all, you can see a responsive navbar
@@ -26,4 +27,3 @@ Live Site [Create React App](https://github.com/facebook/create-react-app).
 * React query
 * MongoDb
 * Express
-
