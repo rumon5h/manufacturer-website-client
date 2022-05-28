@@ -1,7 +1,8 @@
 # RRElectronics
 
 Live Side [Live Side](https://assignment-12-d283f.web.app/).
-Server Side Code Link [Live Side](https://github.com/programming-hero-web-course1/manufacturer-website-server-side-rumon5).
+
+Server Side Code Link [Server Side](https://github.com/programming-hero-web-course1/manufacturer-website-server-side-rumon5).
 
 ## Features
 * First of all, you can see a responsive navbar

@@ -2,6 +2,7 @@ import { MinusIcon, PlusIcon } from '@heroicons/react/solid';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
@@ -14,18 +15,19 @@ const Purchase = () => {
     const [user] = useAuthState(auth);
     const [bookingInfo, setBookingInfo] = useState({});
 
-    useEffect(() => {
-        const url = `http://localhost:5000/tool?id=${_id}`;
-     
+    const url = `http://localhost:5000/tool?id=${_id}`;
+ 
+    const { isLoading, data, } = useQuery(['tool', _id], () =>
         fetch(url)
             .then(res => res.json())
-            .then(data => {
-                setTool(data);
-            });
-    }, [_id]);
+    )
 
-    if (!tool) {
+    if (isLoading) {
         return <Loading></Loading>
+    }
+
+    if(data){
+        setTool(data)
     }
     const handleIncreaseQuantity = (event) => {
         const newQuantity = orderQuantity + 1;
@@ -78,13 +80,13 @@ const Purchase = () => {
                 quantity: tool.quantity,
                 image: tool.image,
                 email: user.email,
-                description: tool.description,              
+                description: tool.description,
                 displayName: user.displayName,
                 paid: false,
                 pending: true
-                
+
             }
-  
+
             fetch('http://localhost:5000/tools', {
                 method: "PUT",
                 headers: {
@@ -113,7 +115,6 @@ const Purchase = () => {
                 })
         }
     }
-
 
     return (
         <div>
