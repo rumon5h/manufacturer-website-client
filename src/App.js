@@ -19,7 +19,8 @@ import AdminPrivateRoute from './pages/AdminPrivateRoute/AdminPrivateRoute';
 import Blogs from './pages/Blogs/Blogs';
 import AddProduct from './pages/Dashboard/AddProduct';
 import Portfolio from './pages/Portfolio/Portfolio';
-import ManageProduct from './pages/Dashboard/ManageProduct/ManageProduct';
+import ManageAllOrder from './pages/Dashboard/ManageAllOrder/ManageAllOrder';
+import ManageProduct from './pages/Dashboard/ManageProduct';
 
 
 function App() {
@@ -48,7 +49,8 @@ function App() {
             <Payment />
           </PrivateRoute>
         }></Route>
-        <Route index element={<AddReview></AddReview>}></Route>
+        
+        <Route index element={<Profile></Profile>}></Route>
         <Route path='/dashboard/profile' element={<Profile></Profile>}></Route>
         <Route path='/dashboard/myOrders' element={<MyOrders></MyOrders>}></Route>
         <Route path='/dashboard/addReviews' element={<AddReview></AddReview>}></Route>
@@ -58,6 +60,11 @@ function App() {
         <Route path='/dashboard/addProduct' element={
           <AdminPrivateRoute>
             <AddProduct/>
+          </AdminPrivateRoute>
+        }></Route>
+        <Route path='/dashboard/manageAllOrder' element={
+          <AdminPrivateRoute>
+            <ManageAllOrder/>
           </AdminPrivateRoute>
         }></Route>
         <Route path='/dashboard/manageProduct' element={

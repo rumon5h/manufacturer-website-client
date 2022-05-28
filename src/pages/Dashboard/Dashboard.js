@@ -8,7 +8,7 @@ import Loading from '../Shared/Loading/Loading';
 const Dashboard = () => {
   const [user] = useAuthState(auth);
   const { isLoading, error, data: userInfo, refetch } = useQuery(['user'], () =>
-    fetch(`http://localhost:5000/user?email=${user?.email}`)
+    fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`)
       .then(res => res.json())
   );
 
@@ -39,6 +39,9 @@ const Dashboard = () => {
           }
           {
             userInfo?.role === 'Admin' && <li><Link to='/dashboard/addProduct'>Add A Product</Link></li>
+          }
+          {
+            userInfo?.role === 'Admin' && <li><Link to='/dashboard/manageAllOrder'>Manage Orders</Link></li>
           }
           {
             userInfo?.role === 'Admin' && <li><Link to='/dashboard/manageProduct'>Manage Product</Link></li>

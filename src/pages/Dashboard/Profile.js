@@ -9,7 +9,7 @@ const Profile = () => {
     const [user] = useAuthState(auth);
 
     const { isLoading, error, data, refetch } = useQuery(['user'], () =>
-        fetch(`http://localhost:5000/user?email=${user?.email}`)
+        fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`)
             .then(res => res.json())
     )
     if(error){
@@ -39,7 +39,7 @@ const Profile = () => {
             education,
         }
 
-        fetch(`http://localhost:5000/user?email=${user?.email}`, {
+        fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

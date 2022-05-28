@@ -11,7 +11,7 @@ const useToken = (user) => {
         const userInfo = { email }
 
         if (email) {
-            fetch(`http://localhost:5000/authUser/${email}`, {
+            fetch(`https://calm-castle-51840.herokuapp.com/authUser/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
@@ -31,7 +31,7 @@ const useToken = (user) => {
     useEffect(() => {
         const handleLoadUserInfo = async () => {
             const email = user?.user?.email
-            const url = `http://localhost:5000/user?email=${email}`;
+            const url = `https://calm-castle-51840.herokuapp.com/user?email=${email}`;
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
@@ -49,7 +49,7 @@ const useToken = (user) => {
                 name,
                 email,
             }
-           fetch(`http://localhost:5000/user?email=${user?.user?.email}`, {
+           fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.user?.email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

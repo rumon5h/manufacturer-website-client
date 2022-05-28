@@ -17,7 +17,7 @@ const Portfolio = () => {
             </div>
             <div className="m-12 ">
                 <div className="">
-                    <h5 className='text-2xl font-bold text-gray-900'>Technology🥇</h5>
+                    <h5 className='text-2xl font-bold text-gray-900'>Tools & Technologies🥇</h5>
                     <div className='grid grid-cols-2 md:grid-cols-5'>
                         <span className="p-3 bg-slate-100 m-3">HTML5</span>
                         <span className="p-3 bg-slate-100 m-3">CSS3</span>
@@ -32,14 +32,6 @@ const Portfolio = () => {
                         <span className="p-3 bg-slate-100 m-3">Json web token</span>
                         <span className="p-3 bg-slate-100 m-3">MongoDB</span>
                         <span className="p-3 bg-slate-100 m-3">Express</span>
-                    </div>
-
-                </div>
-            </div>
-            <div className="m-12 ">
-                <div className="">
-                    <h5 className='text-2xl font-bold text-gray-900'>Tools & Technologies🥇</h5>
-                    <div className='grid grid-cols-2 md:grid-cols-5'>
                         <span className="p-3 bg-slate-100 m-3">VS Code</span>
                         <span className="p-3 bg-slate-100 m-3">Github</span>
                         <span className="p-3 bg-slate-100 m-3">Figma</span>
@@ -49,6 +41,7 @@ const Portfolio = () => {
 
                 </div>
             </div>
+            
             <div className="m-12 ">
                 <div className="">
                     <h5 className='text-2xl font-bold text-gray-900'>Some Best Website🥇</h5>

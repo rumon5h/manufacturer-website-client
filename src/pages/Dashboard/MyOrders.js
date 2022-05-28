@@ -9,7 +9,7 @@ const MyOrders = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        const url = `http://localhost:5000/orders?email=${user?.email}`
+        const url = `https://calm-castle-51840.herokuapp.com/orders?email=${user?.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -19,8 +19,7 @@ const MyOrders = () => {
     }, [user]);
 
     const handleDeleteOrderEvent = (id) => {
-
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://calm-castle-51840.herokuapp.com/order?id=${id}`;
         fetch(url, {
             method: 'DELETE'
         })

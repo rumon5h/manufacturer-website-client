@@ -20,7 +20,7 @@ const AddProduct = () => {
             image
         };
 
-        fetch('http://localhost:5000/tool', {
+        fetch('https://calm-castle-51840.herokuapp.com/tool', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -29,7 +29,9 @@ const AddProduct = () => {
         })
         .then(res => res.json())
         .then(data => {
-            toast.success('Successfully added')
+            toast.success('Successfully added');
+            event.target.reset()
+
         })
 
     }

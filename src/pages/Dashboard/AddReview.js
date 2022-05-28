@@ -23,7 +23,7 @@ const AddReview = () => {
             name
         }
 
-        const url = `http://localhost:5000/review`;
+        const url = `https://calm-castle-51840.herokuapp.com/review`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -33,7 +33,8 @@ const AddReview = () => {
         })
         .then(res => res.json())
         .then(data => {
-            toast.success('Review update successful.')
+            toast.success('Review update successful.');
+            event.target.reset()
         })
     }
     return (

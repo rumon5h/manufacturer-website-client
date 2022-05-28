@@ -11,7 +11,7 @@ const AdminPrivateRoute = ({ children }) => {
     const location = useLocation();
 
     const { isLoading, data, } = useQuery(['user'], () =>
-        fetch(`http://localhost:5000/user?email=${user?.email}`)
+        fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`)
             .then(res => res.json())
     )
 
