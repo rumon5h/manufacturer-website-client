@@ -9,7 +9,6 @@ const ManageProduct = () => {
         fetch('https://calm-castle-51840.herokuapp.com/tools')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setTools(data)
             })
     }, []);
@@ -20,7 +19,6 @@ const ManageProduct = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             toast.success('Deleted successful.');
             if(data){
                 const remaining = tools.filter(tool => tool._id !== id);
@@ -31,15 +29,15 @@ const ManageProduct = () => {
     return (
         <div className='grid grid-cols-1 gap-3 m-9 md:grid-cols-2'>
             {
-                tools?.map(product => <div key={product?._id} class="card w-96 bg-base-100 shadow-xl">
-                    <figure><img src={product?.image} alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">{product?.name}</h2>
+                tools?.map(product => <div key={product?._id} className="card w-96 bg-base-100 shadow-xl">
+                    <figure><img className='h-52' src={product?.image} alt="Shoes" /></figure>
+                    <div className="card-body">
+                        <h2 className="card-title">{product?.name}</h2>
                         <p>{product?.price}</p>
                         <p>{product?.quantity}</p>
                         <p>{product?.description}</p>
-                        <div class="card-actions justify-end">
-                            <label for="delete-product-modal-3" class="btn modal-button">Delete</label>
+                        <div className="card-actions justify-end">
+                            <label htmlFor="delete-product-modal-3" className="btn modal-button">Delete</label>
 
                         </div>
                     </div>

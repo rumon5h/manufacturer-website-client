@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useQuery } from 'react-query';
-import Loading from '../../Shared/Loading/Loading';
 import ManageProductDeleteModal from './ManageProductDeleteModal';
 
 const ManageProduct = () => {
@@ -12,7 +10,6 @@ const ManageProduct = () => {
         fetch('https://calm-castle-51840.herokuapp.com/allOrder')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setOrders(data)
             })
     }, [])
@@ -35,7 +32,7 @@ const ManageProduct = () => {
         <div className='grid gap-4 m-3 grid-cols-1 md:grid-cols-2'>
             {
                 orders?.map(order => <div key={order._id} className="card w-96 bg-base-100 shadow-xl">
-                    <figure><img src={order.image} alt="" /></figure>
+                    <figure><img className='h-52' src={order.image} alt="" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">{order.name}</h2>
                         <p>{order.description}</p>

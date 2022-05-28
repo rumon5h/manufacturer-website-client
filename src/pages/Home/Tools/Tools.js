@@ -18,13 +18,13 @@ const Tools = () => {
                     data?.slice(0, 6).map(tool => <div key={tool._id} className="flex justify-center">
                         <div className="rounded-lg shadow-lg bg-white max-w-sm">
                             <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
-                                <img className="rounded-t-lg" src={tool?.image} alt="" />
+                                <img className="rounded-t-lg h-52 " src={tool?.image} alt="" />
                             </a>
                             <div className="p-6">
-                                <h5 className="text-gray-900 text-xl font-medium mb-2">{tool?.name}</h5>
+                                <h5 className="text-gray-900 text-xl font-medium mb-2">{tool?.name.slice(0,9)}...</h5>
                                 <p>Price: {tool?.price}</p>
                                 <p className="text-gray-700 text-base mb-4">
-                                    {tool.description.slice(0, 70)}...
+                                    {tool.description.slice(0, 100)}...
                                 </p>
                                 <Link to={`/purchase/${tool._id}`} type="button" className="btn btn-active">Book Now</Link>
                             </div>
