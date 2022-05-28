@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading/Loading';
 import OrderDeleteModal from './OrderDeleteModal';
 
 const MyOrders = () => {
-    const [orders, setOrders] = useState([]);
     const [user] = useAuthState(auth);
 
-    useEffect(() => {
-        const url = `https://calm-castle-51840.herokuapp.com/orders?email=${user?.email}`
+    const url = `https://calm-castle-51840.herokuapp.com/orders?email=${user?.email}`
+ 
+    const { isLoading, data: orders, refetch} = useQuery(['tool', user], () =>
         fetch(url)
             .then(res => res.json())
-            .then(data => {
-                setOrders(data);
-            })
-    }, [user]);
+    )
+    if(isLoading){
+        return <Loading></Loading>
+    }
 
     const handleDeleteOrderEvent = (id) => {
         const url = `https://calm-castle-51840.herokuapp.com/order?id=${id}`;
@@ -24,10 +26,7 @@ const MyOrders = () => {
         })
             .then(res => res.json())
             .then(data => {
-                const exist = orders.filter(order => order._id !== id);
-                if (exist) {
-                    setOrders(exist)
-                }
+                refetch();
             });
     }
     return (
