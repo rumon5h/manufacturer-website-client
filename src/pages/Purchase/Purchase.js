@@ -10,24 +10,19 @@ import PurchaseModal from './PurchaseModal';
 
 const Purchase = () => {
     const { _id } = useParams();
-    const [tool, setTool] = useState([]);
     const [orderQuantity, setOrderQuantity] = useState(100);
     const [user] = useAuthState(auth);
     const [bookingInfo, setBookingInfo] = useState({});
 
-    const url = `http://localhost:5000/tool?id=${_id}`;
+    const url = `https://calm-castle-51840.herokuapp.com/tool?id=${_id}`;
  
-    const { isLoading, data, } = useQuery(['tool', _id], () =>
+    const { isLoading, data: tool, } = useQuery(['tool', _id], () =>
         fetch(url)
             .then(res => res.json())
     )
 
     if (isLoading) {
         return <Loading></Loading>
-    }
-
-    if(data){
-        setTool(data)
     }
     const handleIncreaseQuantity = (event) => {
         const newQuantity = orderQuantity + 1;
@@ -87,7 +82,7 @@ const Purchase = () => {
 
             }
 
-            fetch('http://localhost:5000/tools', {
+            fetch('https://calm-castle-51840.herokuapp.com/tools', {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json'
@@ -100,7 +95,7 @@ const Purchase = () => {
                 })
         } else {
 
-            const url = `http://localhost:5000/tools`;
+            const url = `https://calm-castle-51840.herokuapp.com/tools`;
 
             fetch(url, {
                 method: "PUT",
