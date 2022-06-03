@@ -1,5 +1,5 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
@@ -20,25 +20,27 @@ const Purchase = () => {
         fetch(url)
             .then(res => res.json())
     )
-
+    
+    const [totalPrice, setTotalPrice] = useState(tool?.price * orderQuantity);
     if (isLoading) {
         return <Loading></Loading>
     }
     const handleIncreaseQuantity = (event) => {
         const newQuantity = orderQuantity + 1;
         tool.quantity = tool.quantity - 1;
-        tool.price = 30 * parseInt(newQuantity);
+        const totalPrice = parseInt(tool.price) * parseInt(newQuantity);
         setOrderQuantity(newQuantity);
         const bookedTool = {
             name: tool.name,
             price: tool.price,
+            totalPrice,
             image: tool.image,
             quantity: newQuantity,
             email: user.email,
             description: tool.description,
             displayName: user.displayName,
             paid: false,
-            pending: true
+            shipped: false
         }
         setBookingInfo(bookedTool)
     }
@@ -49,19 +51,20 @@ const Purchase = () => {
         }
         const newQuantity = orderQuantity - 1;
         tool.quantity = parseInt(tool.quantity) - 1;
-        tool.price = 30 * parseInt(newQuantity);
+        const totalPrice = parseInt(tool.price) * parseInt(newQuantity);
         setOrderQuantity(newQuantity);
 
         const bookedTool = {
             name: tool.name,
             price: tool.price,
+            totalPrice,
             quantity: newQuantity,
             image: tool.image,
             email: user.email,
             description: tool.description,
             displayName: user.displayName,
             paid: false,
-            pending: true
+            shipped: false
         }
         setBookingInfo(bookedTool)
     }
@@ -69,16 +72,18 @@ const Purchase = () => {
     const handleBookingInfo = (event) => {
 
         if (!bookingInfo?.email) {
+            const totalPrice = parseInt(tool.price) * tool.quantity;
             const bookedTool = {
                 name: tool.name,
                 price: parseInt(tool.price) * 100,
                 quantity: tool.quantity,
+                totalPrice,
                 image: tool.image,
                 email: user.email,
                 description: tool.description,
                 displayName: user.displayName,
                 paid: false,
-                pending: true
+                shipped: false
 
             }
 
@@ -119,6 +124,7 @@ const Purchase = () => {
                     <h2 className="card-title">{tool?.name}</h2>
                     <p>{tool?.description}</p>
                     <p>Price: {parseInt(tool?.price)}</p>
+                    <p>TotalPrice: {parseInt(totalPrice || bookingInfo?.totalPrice)}</p>
                     <p>In Stock: {tool?.quantity}</p>
                     <p>Minimum Order: {orderQuantity}</p>
                     <div className='flex justify-center items-center'>

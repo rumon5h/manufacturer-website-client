@@ -10,6 +10,7 @@ const ManageProduct = () => {
             .then(res => res.json())
             .then(data => {
                 setTools(data)
+                console.log(data);
             })
     }, []);
 
@@ -33,12 +34,11 @@ const ManageProduct = () => {
                     <figure><img className='h-52' src={product?.image} alt="Shoes" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">{product?.name}</h2>
-                        <p>{product?.price}</p>
-                        <p>{product?.quantity}</p>
+                        <p>Price: {product?.price}</p>
+                        <p>Quantity: {product?.quantity}</p>
                         <p>{product?.description}</p>
                         <div className="card-actions justify-end">
                             <label htmlFor="delete-product-modal-3" className="btn modal-button">Delete</label>
-
                         </div>
                     </div>
                     {

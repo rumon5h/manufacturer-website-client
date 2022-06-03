@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -41,7 +41,7 @@ const MyOrders = () => {
                             </a>
                             <div className="p-6">
                                 <h5 className="text-gray-900 text-xl font-medium mb-2">{order?.name.slice(0,9)}</h5>
-                                <p>Price: {order?.price}</p>
+                                <p>Total Price: {order?.totalPrice}</p>
                                 <p className='font-bold text-gray-900'>Payment: {order?.paid ? 'Paid' : "Unpaid"}</p>
                                 <p className='font-bold text-gray-900'>Status: {!order?.pending ? 'Shipped' : "Pending"}</p>
                                 <p className="text-gray-700 text-base mb-4">
