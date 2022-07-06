@@ -22,7 +22,7 @@ const Navbar = () => {
         {user?.uid ? <li><Link onClick={handleLogOutEvent} className='mr-2' to='/login' >LogOut</Link></li> : <li><Link className='mr-2' to='/login' >Login</Link></li>}
     </>
     return (
-        <div className="navbar bg-gray-900 text-white">
+        <div className="navbar fixed top-0 z-40 bg-gray-900 text-white">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -32,9 +32,9 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='' className="btn btn-ghost normal-case text-xl">RRElectronics</Link>
+                <Link to='' className="btn btn-ghost normal-case text-xl">DH Electronics</Link>
             </div>
-            <div className="navbar-middle hidden lg:flex">
+            <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     {menuItems}
                 </ul>

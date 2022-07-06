@@ -21,7 +21,7 @@ const Tools = () => {
                                 <img className="rounded-t-lg h-52 " src={tool?.image} alt="" />
                             </a>
                             <div className="p-6">
-                                <h5 className="text-gray-900 text-xl font-medium mb-2">{tool?.name.slice(0,9)}...</h5>
+                                <h5 title={tool?.name} className="text-gray-900 text-xl font-medium mb-2">{tool?.name.slice(0,17)}...</h5>
                                 <p>Price: {tool?.price}</p>
                                 <p className="text-gray-700 text-base mb-4">
                                     {tool.description.slice(0, 100)}...
