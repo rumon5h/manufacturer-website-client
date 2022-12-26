@@ -14,7 +14,7 @@ const Purchase = () => {
     const [user] = useAuthState(auth);
     const [bookingInfo, setBookingInfo] = useState({});
 
-    const url = `https://calm-castle-51840.herokuapp.com/tool?id=${_id}`;
+    const url = `https://electronics.onrender.com/tool?id=${_id}`;
  
     const { isLoading, data: tool, } = useQuery(['tool', _id], () =>
         fetch(url)
@@ -87,8 +87,8 @@ const Purchase = () => {
 
             }
 
-            fetch('https://calm-castle-51840.herokuapp.com/tools', {
-                method: "PUT",
+            fetch('https://electronics.onrender.com/tools', {
+                method: "PATCH",
                 headers: {
                     'content-type': 'application/json'
                 },
@@ -100,10 +100,10 @@ const Purchase = () => {
                 })
         } else {
 
-            const url = `https://calm-castle-51840.herokuapp.com/tools`;
+            const url = `https://electronics.onrender.com/tools`;
 
             fetch(url, {
-                method: "PUT",
+                method: "PATCH",
                 headers: {
                     'content-type': 'application/json'
                 },

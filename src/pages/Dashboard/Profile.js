@@ -9,7 +9,7 @@ const Profile = () => {
     const [user] = useAuthState(auth);
 
     const { isLoading, error, data, refetch } = useQuery(['user'], () =>
-        fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`)
+        fetch(`https://electronics.onrender.com/user?email=${user?.email}`)
             .then(res => res.json())
     )
     if(error){
@@ -39,8 +39,8 @@ const Profile = () => {
             education,
         }
 
-        fetch(`https://calm-castle-51840.herokuapp.com/user?email=${user?.email}`, {
-            method: 'PUT',
+        fetch(`https://electronics.onrender.com/user?email=${user?.email}`, {
+            method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             },

@@ -6,7 +6,7 @@ const ManageProduct = () => {
     const [tools, setTools] = useState([]);
 
     useEffect(() => {
-        fetch('https://calm-castle-51840.herokuapp.com/tools')
+        fetch('https://electronics.onrender.com/tools')
             .then(res => res.json())
             .then(data => {
                 setTools(data)
@@ -15,7 +15,7 @@ const ManageProduct = () => {
     }, []);
 
     const handleDeleteProduct = (id) => {
-        fetch(`https://calm-castle-51840.herokuapp.com/tool?id=${id}`, {
+        fetch(`https://electronics.onrender.com/tool?id=${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())

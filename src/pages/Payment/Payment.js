@@ -14,7 +14,7 @@ const Payment = () => {
     const [payment, setPayment] = useState({});
 
     useEffect(() => {
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://electronics.onrender.com/order/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => {

@@ -20,7 +20,7 @@ const AddProduct = () => {
             image
         };
 
-        fetch('https://calm-castle-51840.herokuapp.com/tool', {
+        fetch('https://electronics.onrender.com/tool', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -23,7 +23,7 @@ const AddReview = () => {
             name
         }
 
-        const url = `https://calm-castle-51840.herokuapp.com/review`;
+        const url = `https://electronics.onrender.com/review`;
         fetch(url, {
             method: 'POST',
             headers: {

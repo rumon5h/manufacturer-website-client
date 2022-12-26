@@ -18,7 +18,7 @@ const PurchaseModal = ({tool}) => {
             address,
             number
         }
-        fetch('https://calm-castle-51840.herokuapp.com/user', {
+        fetch('https://electronics.onrender.com/user', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

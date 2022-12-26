@@ -9,7 +9,7 @@ import OrderDeleteModal from './OrderDeleteModal';
 const MyOrders = () => {
     const [user] = useAuthState(auth);
 
-    const url = `https://calm-castle-51840.herokuapp.com/orders?email=${user?.email}`
+    const url = `https://electronics.onrender.com/orders?email=${user?.email}`
  
     const { isLoading, data: orders, refetch} = useQuery(['tool', user], () =>
         fetch(url)
@@ -20,7 +20,7 @@ const MyOrders = () => {
     }
 
     const handleDeleteOrderEvent = (id) => {
-        const url = `https://calm-castle-51840.herokuapp.com/order?id=${id}`;
+        const url = `https://electronics.onrender.com/order?id=${id}`;
         fetch(url, {
             method: 'DELETE'
         })

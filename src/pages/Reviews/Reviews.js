@@ -5,7 +5,7 @@ import { StarIcon } from '@heroicons/react/solid';
 
 const Reviews = () => {
        const { isLoading, error, data, refetch } = useQuery(['reviews'], () =>
-        fetch(`https://calm-castle-51840.herokuapp.com/reviews`)
+        fetch(`https://electronics.onrender.com/reviews`)
             .then(res => res.json())
     )
 

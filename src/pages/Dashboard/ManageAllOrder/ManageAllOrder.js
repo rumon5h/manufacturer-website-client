@@ -6,14 +6,14 @@ import ManageProductDeleteModal from './ManageProductDeleteModal';
 
 const ManageProduct = () => {
 
-    const { data: orders, isLoading, refetch } = useQuery('allOrder',() => fetch('https://calm-castle-51840.herokuapp.com/allOrder').then(res => res.json()));
+    const { data: orders, isLoading, refetch } = useQuery('allOrder',() => fetch('https://electronics.onrender.com/allOrder').then(res => res.json()));
     console.log(orders);
 
     if (isLoading) {
         return <Loading></Loading>
     }
     const handleDeleteOrderEvent = (id) => {
-        const url = `https://calm-castle-51840.herokuapp.com/order?id=${id}`;
+        const url = `https://electronics.onrender.com/order?id=${id}`;
         fetch(url, {
             method: 'DELETE'
         })
