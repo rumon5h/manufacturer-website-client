@@ -45,7 +45,7 @@ const Login = () => {
     }
 
     return (
-        <div className='w-full flex justify-center items-center'>
+        <div className='w-full mt-6 flex justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <h3 className='text-2xl font-bold text-center'>Log In</h3>
                 <form
