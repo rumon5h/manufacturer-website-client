@@ -22,7 +22,7 @@ const Navbar = () => {
         {user?.uid ? <li><Link onClick={handleLogOutEvent} className='mr-2' to='/login' >LogOut</Link></li> : <li><Link className='mr-2' to='/login' >Login</Link></li>}
     </>
     return (
-        <div className="navbar fixed top-0 z-40 bg-gray-900 text-white">
+        <div className="navbar sticky top-0 z-40 bg-gray-900 text-white">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
