@@ -1,6 +1,6 @@
 {
   "name": "assignment-12-client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^1.0.6",
@@ -19,7 +19,7 @@
     "react-hot-toast": "^2.2.0",
     "react-query": "^3.39.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "*",
     "tw-elements": "^1.0.0-alpha12",
     "web-vitals": "^2.1.4"
   },
