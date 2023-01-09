@@ -49,7 +49,7 @@ const Signup = () => {
     }
 
     return (
-        <div className='w-full flex justify-center items-center'>
+        <div className='w-full flex mt-6 justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <h3 className='text-2xl font-bold text-center'>Sign Up</h3>
                 <form
